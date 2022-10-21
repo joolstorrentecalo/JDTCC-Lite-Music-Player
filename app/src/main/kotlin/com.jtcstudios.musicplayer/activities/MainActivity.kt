@@ -77,7 +77,6 @@ class MainActivity : SimpleActivity() {
         }
 
         volumeControlStream = AudioManager.STREAM_MUSIC
-        checkWhatsNewDialog()
         checkAppOnSDCard()
 
         if (config.appRunCount == 1) {
@@ -145,8 +144,6 @@ class MainActivity : SimpleActivity() {
                 R.id.create_playlist_from_folder -> createPlaylistFromFolder()
                 R.id.import_playlist -> tryImportPlaylist()
                 R.id.equalizer -> launchEqualizer()
-                R.id.settings -> launchSettings()
-                R.id.about -> launchAbout()
                 else -> return@setOnMenuItemClickListener false
             }
             return@setOnMenuItemClickListener true
@@ -576,39 +573,5 @@ class MainActivity : SimpleActivity() {
         hideKeyboard()
         startActivity(Intent(applicationContext, EqualizerActivity::class.java))
     }
-
-    private fun launchSettings() {
-        closeSearch()
-        hideKeyboard()
-        startActivity(Intent(applicationContext, SettingsActivity::class.java))
     }
 
-    private fun launchAbout() {
-        val licenses = LICENSE_EVENT_BUS or LICENSE_GLIDE or LICENSE_M3U_PARSER or LICENSE_AUTOFITTEXTVIEW
-
-        val faqItems = arrayListOf(
-            FAQItem(R.string.faq_1_title, R.string.faq_1_text),
-            FAQItem(R.string.faq_1_title_commons, R.string.faq_1_text_commons),
-            FAQItem(R.string.faq_4_title_commons, R.string.faq_4_text_commons),
-            FAQItem(R.string.faq_9_title_commons, R.string.faq_9_text_commons)
-        )
-
-        if (!resources.getBoolean(R.bool.hide_google_relations)) {
-            faqItems.add(FAQItem(R.string.faq_2_title_commons, R.string.faq_2_text_commons))
-            faqItems.add(FAQItem(R.string.faq_6_title_commons, R.string.faq_6_text_commons))
-        }
-
-        startAboutActivity(R.string.app_name, licenses, BuildConfig.VERSION_NAME, faqItems, true)
-    }
-
-    private fun checkWhatsNewDialog() {
-        arrayListOf<Release>().apply {
-            add(Release(25, R.string.release_25))
-            add(Release(27, R.string.release_27))
-            add(Release(28, R.string.release_28))
-            add(Release(37, R.string.release_37))
-            add(Release(59, R.string.release_59))
-            checkWhatsNew(this, BuildConfig.VERSION_CODE)
-        }
-    }
-}
