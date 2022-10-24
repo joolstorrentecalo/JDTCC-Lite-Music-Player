@@ -70,7 +70,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.JTCJTCC:JT-Framework:84fc4f0ede'
+    implementation 'com.github.JTCJTCC:JT-Framework:225b8254fe'
     implementation 'org.greenrobot:eventbus:3.3.1'
     implementation 'androidx.media:media:1.6.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
@@ -81,8 +81,10 @@ dependencies {
     implementation 'me.grantland:autofittextview:0.2.1'
     coreLibraryDesugaring('com.android.tools:desugar_jdk_libs:1.1.5')
 
+    // Do not update desugar to 1.2.0, it is incompatible with this build
     // higher versions of jaudiotagger not compatible with <= API 25 devices
     // https://bitbucket.org/ijabz/jaudiotagger/issues/149/some-nio-classes-are-unavailable-while
+
     implementation "net.jthink:jaudiotagger:2.2.5"
     kapt "androidx.room:room-compiler:2.4.3"
     implementation "androidx.room:room-runtime:2.4.3"
